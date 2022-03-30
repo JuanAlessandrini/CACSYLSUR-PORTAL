@@ -1,3 +1,3 @@
 <div class="footer-left">
-    All rights reserved &copy; {{ date('Y') }}
+    Desarrollado por KaizenIT  | camaracacsylsur  &copy; {{ date('Y') }}
 </div>

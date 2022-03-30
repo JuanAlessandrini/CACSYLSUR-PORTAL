@@ -3,9 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Certificacion;
 
 class CertificacionController extends Controller
 {
+
+    function __construct(){
+         // $this ->middleware('permission:ver-certificacion |crear-certificacion|editar-rol|borrar-rol',['only'=>['index']]);
+        // $this ->middleware('permission:crear-rol',['only'=>['create','store']]);
+        // $this ->middleware('permission:editar-rol',['only'=>['edit','update']]);
+        // $this ->middleware('permission:borrar-rol',['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +21,9 @@ class CertificacionController extends Controller
      */
     public function index()
     {
-        //
+        
+        $certificacion =Certificacion::paginate(5);
+        return view('certificacion.index',compact('certificacion'));
     }
 
     /**
@@ -23,7 +33,7 @@ class CertificacionController extends Controller
      */
     public function create()
     {
-        //
+        return view('certificacion.crear');
     }
 
     /**
@@ -34,7 +44,13 @@ class CertificacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'curso' =>'required',
+            'slug' => 'required',
+            'validez' => 'required'
+        ]);
+        Certificacion::create($request -> all());
+        return redirect()->route('certificacion.index');
     }
 
     /**
@@ -54,9 +70,9 @@ class CertificacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Certificacion $certificacion)
     {
-        //
+        return view('certificacion.editar',compact('certificacion'));
     }
 
     /**
@@ -66,9 +82,15 @@ class CertificacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Certificacion $certificacion)
     {
-        //
+        request()->validate([
+            'curso' =>'required',
+            'slug' => 'required',
+            'validez' => 'required'
+        ]);
+        $certificacion->update($request->all());
+        return redirect()->route('certificacion.index');
     }
 
     /**
@@ -77,8 +99,10 @@ class CertificacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Certificacion $certificacion)
     {
-        //
+    
+        $certificacion->delete();
+        return redirect()->route('certificacion.index');
     }
 }

@@ -30,6 +30,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => ['auth']],function(){
     Route::resource('roles',RolController::class);
-    Route::resource('user',UserController::class);
-    Route::resource('certificado',CertifiacionController::class);
+    Route::resource('usuarios',UserController::class);
+    Route::resource('certificaciones',CertifiacionController::class);
 });
