@@ -8,8 +8,8 @@ use App\http\Controllers\Controllers;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facedes\Hash;
-use Illumintate\Support\Facedes\Arr;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
@@ -21,8 +21,8 @@ class UserController extends Controller
     public function index()
     {
         //
-       $usuarios = User :: paginate(5);
-       return view('usuarios.index',compact('usuarios'));
+        $usuarios = User::paginate(5);
+        return view('usuarios.index', compact('usuarios'));
     }
 
     /**
@@ -33,8 +33,8 @@ class UserController extends Controller
     public function create()
     {
         //
-        $roles = Role::pluck('name','name')->all();
-        return view('usuarios.crear',compact('roles'));
+        $roles = Role::pluck('name', 'name')->all();
+        return view('usuarios.crear', compact('roles'));
     }
 
     /**
@@ -45,18 +45,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this -> validate($request,[
+        $this->validate($request, [
             'name' => 'required',
             'email' => 'required|unique:users,email',
-            'password' =>'required|same:confirm-password',
+            'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
 
-        $input  = $request -> all();
+        $input  = $request->all();
         $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
-        $user = assignRole($request->input('roles'));
+        $user->assignRole($request->input('roles'));
 
         return redirect()->route('usuarios.index');
     }
@@ -82,11 +82,11 @@ class UserController extends Controller
     {
         //
 
-        $user = User:: find($id);
-        $roles = Role::pluck('name','name')->all();
-        $userRoles = $user ->roles->pluck('name','name')->all();
+        $user = User::find($id);
+        $roles = Role::pluck('name', 'name')->all();
+        $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('usuarios.editar',compact('user'));
+        return view('usuarios.editar', compact('user', 'roles', 'userRole'));
     }
 
     /**
@@ -98,23 +98,26 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this -> validate($request,[
+        $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|unique:users,email'.$id,
-            'password' =>'same:confirm-password',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);
 
-        $input = $request ->all();
-        if(!empty($input['password'])){
+        $input = $request->all();
+        if (!empty($input['password'])) {
             $input['password'] = Hash::make($input['password']);
-        }else{
-            $input = Arr::except($input,array('password'));
+        } else {
+            $input = Arr::except($input, array('password'));
         }
 
-        $user = User::finde($id);
+        $user = User::find($id);
         $user->update($input);
-        DB::table('model_has_roles')->where('model_id',$id)->delete;
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
+
+        $user->assingRole($request->input('roles'));
+        return redirect()->route('usuarios.index');
     }
 
     /**

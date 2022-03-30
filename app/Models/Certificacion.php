@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Certificacion extends Model
 {
     use HasFactory;
-    protected $filliable =['nombre_curso','slug_curso','validez'];
+    protected $fillable = ['nombre_curso', 'slug_curso', 'validez'];
 }
