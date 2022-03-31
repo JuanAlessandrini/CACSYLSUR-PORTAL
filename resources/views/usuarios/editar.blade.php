@@ -31,6 +31,15 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
+<<<<<<< HEAD
+=======
+                                    <label for="apellido">Apellido</label>
+                                    {!!Form::text('apellido',null,array('class'=>'form-control'))!!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+>>>>>>> 42ed9da71749035639245e9b75d1a161c61dc10b
                                     <label for="email">E-mail</label>
                                     {!!Form::text('email',null,array('class'=>'form-control'))!!}
                                 </div>
