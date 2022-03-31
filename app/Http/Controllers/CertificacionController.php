@@ -10,9 +10,9 @@ class CertificacionController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:ver-certificacion |crear-certificacion|editar-certificacion|borrar-certificacion', ['only' => ['index']]);
-        $this->middleware('permission:editar-certificacion', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:borrar-certificacion', ['only' => ['destroy']]);
+        $this->middleware('permission:ver-certificado|crear-certificado|editar-certificado|borrar-certificado', ['only' => ['index']]);
+        $this->middleware('permission:editar-certificado', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:borrar-certificado', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
