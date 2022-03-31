@@ -5,6 +5,9 @@
     <a class="nav-link" href="/usuarios">
         <i class=" fas fa-users"></i><span>Usuarios</span>
     </a>
+    <a class="nav-link" href="/empresas">
+        <i class=" fas fa-building"></i><span>Empresas</span>
+    </a>
     <a class="nav-link" href="/certificaciones">
         @can('ver-certificado')
         <i class=" fas  fa-certificate"></i><span>Certificaciones</span>
