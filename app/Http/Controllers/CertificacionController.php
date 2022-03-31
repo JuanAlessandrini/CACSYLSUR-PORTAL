@@ -10,10 +10,10 @@ class CertificacionController extends Controller
 
     function __construct()
     {
-        // $this ->middleware('permission:ver-certificacion |crear-certificacion|editar-rol|borrar-rol',['only'=>['index']]);
-        // $this ->middleware('permission:crear-rol',['only'=>['create','store']]);
-        // $this ->middleware('permission:editar-rol',['only'=>['edit','update']]);
-        // $this ->middleware('permission:borrar-rol',['only'=>['destroy']]);
+        $this ->middleware('permission:ver-certificacion |crear-certificacion|editar-certificacion|borrar-certificacion',['only'=>['index']]);
+        $this ->middleware('permission:crear-certificacion',['only'=>['create','store']]);
+        $this ->middleware('permission:editar-certificacion',['only'=>['edit','update']]);
+        $this ->middleware('permission:borrar-certificacion',['only'=>['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -73,7 +73,7 @@ class CertificacionController extends Controller
      */
     public function edit(Certificacion $certificacion)
     {
-        return view('certificaciones.editar', compact('certificaciones'));
+        return view('certificaciones.editar', compact('certificacion'));
     }
 
     /**
@@ -86,8 +86,8 @@ class CertificacionController extends Controller
     public function update(Request $request, Certificacion $certificacion)
     {
         request()->validate([
-            'curso' => 'required',
-            'slug' => 'required',
+            'nombre_curso' => 'required',
+            'slug_curso' => 'required',
             'validez' => 'required'
         ]);
         $certificacion->update($request->all());
