@@ -70,8 +70,9 @@ class CertificacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Certificacion $certificacion)
+    public function edit($id)
     {
+        $certificacion = Certificacion::find($id);
         return view('certificaciones.editar', compact('certificacion'));
     }
 

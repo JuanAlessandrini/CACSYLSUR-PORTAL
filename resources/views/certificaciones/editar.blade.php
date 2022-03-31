@@ -28,26 +28,25 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <label for="nombre_curso">Certificacion</label>
-                                    {!!Form::text ('name',null,array('class'=>'form-control'))!!}
+                                    {!!Form::text ('nombre_curso',null,array('class'=>'form-control'))!!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <label for="slug_curso">Abreviacion de Certificacion</label>
-                                    {!!Form::text ('name',null,array('class'=>'form-control'))!!}
+                                    {!!Form::text ('slug_curso',null,array('class'=>'form-control'))!!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <label for="validez">Validez</label>
-                                    {!!Form::text ('name',null,array('class'=>'form-control'))!!}
+                                    {!!Form::text ('validez',null,array('class'=>'form-control'))!!}
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
-                            </form>
-
                         </div>
+                        {!! Form::close()!!}
                     </div>
                 </div>
             </div>
