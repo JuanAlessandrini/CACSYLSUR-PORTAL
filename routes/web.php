@@ -6,6 +6,7 @@ use App\http\Controllers\RolController;
 use App\http\Controllers\UserController;
 use App\http\Controllers\CertificacionController;
 use App\http\Controllers\EmpresaController;
+use App\Http\Controllers\AlumnoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('usuarios', UserController::class);
     Route::resource('certificaciones', CertificacionController::class);
     Route::resource('empresas', EmpresaController::class);
+    Route::resource('alumnos', EmpresaController::class);
 });
