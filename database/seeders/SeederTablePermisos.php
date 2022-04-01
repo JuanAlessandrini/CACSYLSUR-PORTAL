@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 
 //spatie
 use Spatie\Permission\Models\Permission;
+
 class SeederTablePermisos extends Seeder
 {
     /**
@@ -19,7 +20,7 @@ class SeederTablePermisos extends Seeder
     {
         //
 
-        $permisos =[
+        $permisos = [
             //tabla roles
             'ver-rol',
             'crear-rol',
@@ -32,9 +33,15 @@ class SeederTablePermisos extends Seeder
             'editar-certificado',
             'borrar-certificado',
 
+            //tabla empresas
+            'ver-empresa',
+            'crear-empresa',
+            'editar-empresa',
+            'borrar-empresa',
+
         ];
-        foreach($permisos as $permiso){
-            Permission::create(['name'=>$permiso]);
+        foreach ($permisos as $permiso) {
+            Permission::create(['name' => $permiso]);
         };
     }
 }

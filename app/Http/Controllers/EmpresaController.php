@@ -21,7 +21,7 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $empresa = Empresa::paginate(5);
+        $empresas = Empresa::paginate(5);
         return view('empresas.index', compact('empresas'));
     }
 
@@ -70,7 +70,7 @@ class EmpresaController extends Controller
     public function edit($id)
     {
         $empresa = Empresa::find($id);
-        return view('empresa.editar', compact('empresa'));
+        return view('empresas.editar', compact('empresa'));
     }
 
     /**

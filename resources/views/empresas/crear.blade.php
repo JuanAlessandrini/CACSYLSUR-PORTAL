@@ -21,7 +21,7 @@
                             </button>
                         </div>
                         @endif
-                        {!! Form::open(array('route'=>'empresa.store','method'=>'POST'))!!}
+                        {!! Form::open(array('route'=>'empresas.store','method'=>'POST'))!!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
@@ -34,6 +34,8 @@
                                     <label for="cuit">Cuit</label>
                                     {!!Form::text('cuit',null,array('class'=>'form-control'))!!}
                                 </div>
+                                <br>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
                         </div>
                         {!! Form::close()!!}
