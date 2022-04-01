@@ -35,5 +35,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('usuarios', UserController::class);
     Route::resource('certificaciones', CertificacionController::class);
     Route::resource('empresas', EmpresaController::class);
-    Route::resource('alumnos', EmpresaController::class);
+    Route::resource('alumnos', AlumnoController::class);
 });
