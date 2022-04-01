@@ -46,8 +46,8 @@ class AlumnoController extends Controller
         request()->validate([
             'nombre' => 'required',
             'apellido' => 'required',
-            'dni' => 'reqired',
-            'empresa'
+            'dni' => 'required',
+            'empresa_id' => 'required ',
         ]);
 
         Alumno::create($request->all());
