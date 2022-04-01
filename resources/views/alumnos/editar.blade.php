@@ -3,7 +3,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h3 class="page__heading">Editar Empresa</h3>
+        <h3 class="page__heading">Editar Alumno</h3>
     </div>
     <div class="section-body">
         <div class="row">
@@ -21,18 +21,30 @@
                             </button>
                         </div>
                         @endif
-                        {!! Form::model($empresa,['method'=>'PATCH','route' =>['empresas.update',$empresa->id]])!!}
+                        {!! Form::model($alumno,['method'=>'PATCH','route' =>['alumnos.update',$alumno->id]])!!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <label for="nombre_empresa">Nombre Empresa</label>
-                                    {!!Form::text('nombre_empresa',null,array('class'=>'form-control'))!!}
+                                    <label for="nombre_empresa">Nombre Alumno</label>
+                                    {!!Form::text('nombre',null,array('class'=>'form-control'))!!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <label for="cuit">Cuit</label>
-                                    {!!Form::text('cuit',null,array('class'=>'form-control'))!!}
+                                    <label for="nombre_empresa">Apellido</label>
+                                    {!!Form::text('apellido',null,array('class'=>'form-control'))!!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="dni">DNI</label>
+                                    {!!Form::text('dni',null,array('class'=>'form-control'))!!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="empresa">Empresa</label>
+                                    {!!Form::text('empresa',null,array('class'=>'form-control'))!!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
