@@ -7,6 +7,7 @@ use App\http\Controllers\UserController;
 use App\http\Controllers\CertificacionController;
 use App\http\Controllers\EmpresaController;
 use App\Http\Controllers\AlumnoController;
+use App\Http\Controllers\CursoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,4 +37,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('certificaciones', CertificacionController::class);
     Route::resource('empresas', EmpresaController::class);
     Route::resource('alumnos', AlumnoController::class);
+    Route::resource('cursos', CursoController::class);
 });
