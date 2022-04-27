@@ -1,4 +1,4 @@
-<li class="side-menus {{ Request::is('roles') ? 'active' : '' }}">
+<li class="side-menus {{ Request::is('asd') ? 'active' : '' }}">
     <a class="nav-link" href="/home">
         <i class=" fas fa-home"></i><span>Home</span>
     </a>

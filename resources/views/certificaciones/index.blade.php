@@ -28,7 +28,7 @@
                                 <tr>
                                     <td style="display: none;">{{ $certificacion->id }}</td>
                                     <td>{{ $certificacion->nombre_curso }}</td>
-                                    <td>{{ $certificacion->validez }} anio</td>
+                                    <td>{{ $certificacion->validez }} año </td>
                                     <td>
                                         <form action="{{ route('certificaciones.destroy',$certificacion->id) }}" method="POST">
                                             @can('editar-certificacion')

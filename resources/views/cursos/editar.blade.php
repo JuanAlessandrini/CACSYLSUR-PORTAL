@@ -3,7 +3,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h3 class="page__heading">Editar usuario</h3>
+        <h3 class="page__heading">Editar Empresa</h3>
     </div>
     <div class="section-body">
         <div class="row">
@@ -21,36 +21,18 @@
                             </button>
                         </div>
                         @endif
-                        {!! Form::model($user,['method'=>'PATCH','route' =>['usuarios.update',$user->id]])!!}
+                        {!! Form::model($empresa,['method'=>'PATCH','route' =>['empresas.update',$empresa->id]])!!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <label for="name">Nombre</label>
-                                    {!!Form::text('name',null,array('class'=>'form-control'))!!}
+                                    <label for="nombre_empresa">Nombre Empresa</label>
+                                    {!!Form::text('nombre_empresa',null,array('class'=>'form-control'))!!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <label for="email">E-mail</label>
-                                    {!!Form::text('email',null,array('class'=>'form-control'))!!}
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    {!!Form::password('password',array('class'=>'form-control'))!!}
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <label for="">Confirmar Password</label>
-                                    {!!Form::password('confirm-password',array('class'=>'form-control'))!!}
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <label for="">Roles</label>
-                                    {!! Form::select('roles[]',$roles,$userRole,array('class'=>'form-control')) !!}
+                                    <label for="cuit">Cuit</label>
+                                    {!!Form::text('cuit',null,array('class'=>'form-control'))!!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">

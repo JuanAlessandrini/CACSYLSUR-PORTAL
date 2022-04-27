@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Alumno;
+use App\Models\Empresa;
 
 class AlumnoController extends Controller
 {
@@ -32,7 +33,8 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        return view('alumnos.crear');
+        $empresa = Empresa::pluck('nombre_empresa', 'nombre_empresa')->all();
+        return view('alumnos.crear', compact('empresa'));
     }
 
     /**
@@ -47,7 +49,7 @@ class AlumnoController extends Controller
             'nombre' => 'required',
             'apellido' => 'required',
             'dni' => 'required',
-            'empresa_id' => 'required ',
+            'empresa' => 'required ',
         ]);
 
         Alumno::create($request->all());

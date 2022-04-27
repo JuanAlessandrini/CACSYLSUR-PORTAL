@@ -23,7 +23,7 @@ class CursoController extends Controller
     public function index()
     {
         $cursos = Curso::paginate(5);
-        return view('curso.index', compact('cursos'));
+        return view('cursos.index', compact('cursos'));
     }
 
     /**
@@ -33,7 +33,7 @@ class CursoController extends Controller
      */
     public function create()
     {
-        return view('curso.crear');
+        return view('cursos.crear');
     }
 
     /**
