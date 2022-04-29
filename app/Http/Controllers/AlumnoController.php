@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Alumno;
 use App\Models\Empresa;
+use Illuminate\Http\Request;
 
+/**
+ * Class AlumnoController
+ * @package App\Http\Controllers
+ */
 class AlumnoController extends Controller
 {
-    function __construct()
-    {
-        $this->middleware('permission:ver-alumno|crear-alumno|editar-alumno|borrar-alumno', ['only' => ['index']]);
-        $this->middleware('permission:edita-alumno', ['only' => ['edit', 'upadte']]);
-        $this->middleware('permission:borrar-alumno', ['only' => ['destroy']]);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -22,8 +19,10 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        $alumnos = Alumno::paginate(5);
-        return view('alumno.index', compact('alumnos'));
+        $alumnos = Alumno::paginate();
+        $empresa = Empresa::pluck('nombre_empresa', 'id');
+        return view('alumno.index', compact('alumnos', 'empresa'))
+            ->with('i', (request()->input('page', 1) - 1) * $alumnos->perPage());
     }
 
     /**
@@ -33,80 +32,82 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        $empresa = Empresa::pluck('nombre_empresa', 'nombre_empresa')->all();
-        return view('alumno.create', compact('empresa'));
+        $alumno = new Alumno();
+        $empresa = Empresa::pluck('nombre_empresa', 'id');
+
+        return view('alumno.create', compact('alumno', 'empresa'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'dni' => 'required',
-            'empresa' => 'required ',
-        ]);
+        request()->validate(Alumno::$rules);
 
-        Alumno::create($request->all());
-        return redirect()->route('alumno.index');
+        $alumno = Alumno::create($request->all());
+
+        return redirect()->route('alumnos.index')
+            ->with('success', 'Alumno creado exitosamente.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $alumno = Alumno::find($id);
+
+        return view('alumno.show', compact('alumno'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $alumno = Alumno::find($id);
-        return view('alumno.editar', compact('alumno'));
+        $empresa = Empresa::pluck('nombre_empresa', 'id');
+
+        return view('alumno.edit', compact('alumno', 'empresa'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  Alumno $alumno
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Alumno $alumno)
     {
-        request()->validate([
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'dni' => 'reqired',
-            'empresa'
-        ]);
+        request()->validate(Alumno::$rules);
+
         $alumno->update($request->all());
-        return redirect()->route('alumno.index');
+
+        return redirect()->route('alumnos.index')
+            ->with('success', 'Alumno actualizado correctamente');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy(Alumno $alumno)
+    public function destroy($id)
     {
-        $alumno->delete();
-        return redirect()->route('alumno.index');
+        $alumno = Alumno::find($id)->delete();
+
+        return redirect()->route('alumnos.index')
+            ->with('success', 'Alumno borrado correctamente');
     }
 }

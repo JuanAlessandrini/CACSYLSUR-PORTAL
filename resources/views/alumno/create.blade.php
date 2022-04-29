@@ -1,30 +1,32 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Create Alumno
+Create Alumno
 @endsection
 
 @section('content')
-    <section class="content container-fluid">
-        <div class="row">
-            <div class="col-md-12">
+<section class="section">
+    <div class="section-header">
+        <h3 class="page__heading">Alta de Alumnos</h3>
 
-                @includeif('partials.errors')
+    </div>
+    <div class="row">
+        <div class="col-md-12">
 
-                <div class="card card-default">
-                    <div class="card-header">
-                        <span class="card-title">Create Alumno</span>
-                    </div>
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('alumnos.store') }}"  role="form" enctype="multipart/form-data">
-                            @csrf
+            @includeif('partials.errors')
 
-                            @include('alumno.form')
+            <div class="card card-default">
 
-                        </form>
-                    </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('alumnos.store') }}" role="form" enctype="multipart/form-data">
+                        @csrf
+
+                        @include('alumno.form')
+
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 @endsection

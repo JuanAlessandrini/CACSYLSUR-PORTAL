@@ -17,13 +17,13 @@
             {!! $errors->first('dni', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('empresa_id') }}
-            {{ Form::text('empresa_id', $alumno->empresa_id, ['class' => 'form-control' . ($errors->has('empresa_id') ? ' is-invalid' : ''), 'placeholder' => 'Empresa Id']) }}
+            {{ Form::label('empresa') }}
+            {{ Form::select('empresa_id',$empresa, $alumno->nombre_empresa, ['class' => 'form-control' . ($errors->has('empresa_id') ? ' is-invalid' : ''), 'placeholder' => 'Empresa']) }}
             {!! $errors->first('empresa_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
     </div>
     <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
 </div>
