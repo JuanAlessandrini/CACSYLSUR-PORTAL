@@ -84,7 +84,7 @@ class EmpresaController extends Controller
     {
         request()->validate([
             'nombre_empresa' => 'required',
-            'cuit' => 'required',
+            'cuit' => ['required', 'max:11'],
         ]);
 
         $empresa->update($request->all());

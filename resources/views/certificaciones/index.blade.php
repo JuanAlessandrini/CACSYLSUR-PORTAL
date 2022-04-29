@@ -3,7 +3,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h3 class="page__heading">Certificaciones</h3>
+        <h3 class="page__heading">Cursos</h3>
     </div>
     <div class="section-body">
         <div class="row">
@@ -19,7 +19,7 @@
                         <table class="table table-striped mt-2">
                             <thead style="background-color:#00a3e4">
                                 <th style="display: none;">ID</th>
-                                <th style="color:#fff;">Nombre Certifiacion</th>
+                                <th style="color:#fff;">Nombre Curso</th>
                                 <th style="color:#fff;">Validez</th>
                                 <th style="color:#fff;">Acciones</th>
                             </thead>

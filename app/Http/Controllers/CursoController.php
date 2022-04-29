@@ -45,11 +45,12 @@ class CursoController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'id_certificacion' => 'required',
-            'id_alumno' => 'required',
-            'calificacion' => 'required',
-            'fecha_realizacion' => 'required'
+            'nombre_grupo' => 'required',
+            'mes_dictado' => 'required',
+            'anio_dictado' => 'required'
         ]);
+        Curso::create($request->all());
+        return redirect()->route('cursos.index');
     }
 
     /**
@@ -85,10 +86,9 @@ class CursoController extends Controller
     public function update(Request $request, Curso $curso)
     {
         request()->validate([
-            'id_certificacion' => 'required',
-            'id_alumno' => 'required',
-            'calificacion' => 'required',
-            'fecha_realizacion' => 'required'
+            'nombre_grupo' => 'required',
+            'mes_dictado' => 'required',
+            'anio_dictado' => 'required'
         ]);
         $curso->update($request->all());
         return redirect()->route('cursos.index');

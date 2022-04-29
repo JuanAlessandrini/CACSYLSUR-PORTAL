@@ -44,7 +44,7 @@
                             <div class="col-md-4 col-xl-4">
                                 <div class="card bg-c-pink order-card">
                                     <div class="card-block">
-                                        <h5>Certificaciones</h5>
+                                        <h5>Cursos</h5>
                                         @php
                                         use App\Models\Certificacion;
                                         $cant_cert = Certificacion::count();
@@ -57,7 +57,7 @@
                             <div class="col-md-4 col-xl-4">
                                 <div class="card bg-c-pink order-card">
                                     <div class="card-block">
-                                        <h5>Cursos</h5>
+                                        <h5>Grupos</h5>
                                         @php
                                         use App\Models\Curso;
                                         $cant_cert = Curso::count();

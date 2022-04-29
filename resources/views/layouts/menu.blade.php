@@ -9,11 +9,11 @@
         <i class=" fas fa-building"></i><span>Empresas</span>
     </a>
     <a class="nav-link" href="/cursos">
-        <i class=" fas fa-chalkboard "></i><span>Cursos</span>
+        <i class=" fas fa-chalkboard "></i><span>Grupos</span>
     </a>
     <a class="nav-link" href="/certificaciones">
         @can('ver-certificado')
-        <i class=" fas  fa-certificate"></i><span>Certificaciones</span>
+        <i class=" fas  fa-certificate"></i><span>Cursos</span>
         @endcan
     </a>
     <a class="nav-link" href="/usuarios">
