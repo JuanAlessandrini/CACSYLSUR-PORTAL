@@ -23,7 +23,7 @@ class AlumnoController extends Controller
     public function index()
     {
         $alumnos = Alumno::paginate(5);
-        return view('alumnos.index', compact('alumnos'));
+        return view('alumno.index', compact('alumnos'));
     }
 
     /**
@@ -34,7 +34,7 @@ class AlumnoController extends Controller
     public function create()
     {
         $empresa = Empresa::pluck('nombre_empresa', 'nombre_empresa')->all();
-        return view('alumnos.crear', compact('empresa'));
+        return view('alumno.create', compact('empresa'));
     }
 
     /**
@@ -53,7 +53,7 @@ class AlumnoController extends Controller
         ]);
 
         Alumno::create($request->all());
-        return redirect()->route('alumnos.index');
+        return redirect()->route('alumno.index');
     }
 
     /**
@@ -76,7 +76,7 @@ class AlumnoController extends Controller
     public function edit($id)
     {
         $alumno = Alumno::find($id);
-        return view('alumnos.editar', compact('alumno'));
+        return view('alumno.editar', compact('alumno'));
     }
 
     /**
@@ -95,7 +95,7 @@ class AlumnoController extends Controller
             'empresa'
         ]);
         $alumno->update($request->all());
-        return redirect()->route('alumnos.index');
+        return redirect()->route('alumno.index');
     }
 
     /**
@@ -107,6 +107,6 @@ class AlumnoController extends Controller
     public function destroy(Alumno $alumno)
     {
         $alumno->delete();
-        return redirect()->route('alumnos.index');
+        return redirect()->route('alumno.index');
     }
 }

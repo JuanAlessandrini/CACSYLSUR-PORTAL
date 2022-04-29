@@ -9,4 +9,8 @@ class Empresa extends Model
 {
     use HasFactory;
     protected $fillable = ['nombre_empresa', 'cuit'];
+    public function empresa()
+    {
+        return $this->hasMany(Alumno::class, 'id');
+    }
 }

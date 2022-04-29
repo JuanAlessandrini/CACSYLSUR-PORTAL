@@ -9,4 +9,9 @@ class Alumno extends Model
 {
     use HasFactory;
     protected $fillable = ['nombre', 'apellido', 'dni'];
+
+    public function empresas()
+    {
+        return $this->belongsTo(Empresa::class, 'empresa_id');
+    }
 }

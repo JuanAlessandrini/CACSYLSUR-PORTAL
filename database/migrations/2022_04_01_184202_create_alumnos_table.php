@@ -18,7 +18,11 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('dni');
-            $table->string('empresa_id');
+            $table->foreignId('empresa_id')
+                ->nullable()
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
             $table->timestamps();
         });
     }
