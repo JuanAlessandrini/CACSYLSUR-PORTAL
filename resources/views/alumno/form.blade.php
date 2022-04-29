@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('dni') }}
-            {{ Form::text('dni', $alumno->dni, ['class' => 'form-control' . ($errors->has('dni') ? ' is-invalid' : ''), 'placeholder' => 'Dni']) }}
+            {{ Form::text('dni', $alumno->dni, ['class' => 'form-control' . ($errors->has('dni') ? ' is-invalid' : ''), 'placeholder' => 'Dni','maxlength'=>'8']) }}
             {!! $errors->first('dni', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
