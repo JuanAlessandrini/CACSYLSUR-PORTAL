@@ -16,8 +16,14 @@ return new class extends Migration
         Schema::create('cursos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_grupo');
+            $table->foreignId('certificacion_id')
+                ->nullable()
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
             $table->string('mes_dictado');
             $table->string('anio_dictado');
+            $table->string('estado');
             $table->timestamps();
         });
     }

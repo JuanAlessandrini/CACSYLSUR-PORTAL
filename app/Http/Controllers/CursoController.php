@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use GuzzleHttp\Middleware;
-use Illuminate\Http\Request;
 use App\Models\Curso;
+use App\Models\Certificacion;
+use Illuminate\Http\Request;
 
+/**
+ * Class CursoController
+ * @package App\Http\Controllers
+ */
 class CursoController extends Controller
 {
-    function __construct()
-    {
-        $this->middleware('permission:ver-curso|crear-curso|editar-curso|borrar-curso', ['only' => ['index']]);
-        $this->middleware('permission:editar-curso', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:borrar-empresa', ['only' => ['destroy']]);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -22,8 +19,10 @@ class CursoController extends Controller
      */
     public function index()
     {
-        $cursos = Curso::paginate(5);
-        return view('cursos.index', compact('cursos'));
+        $cursos = Curso::paginate();
+
+        return view('curso.index', compact('cursos'))
+            ->with('i', (request()->input('page', 1) - 1) * $cursos->perPage());
     }
 
     /**
@@ -33,76 +32,81 @@ class CursoController extends Controller
      */
     public function create()
     {
-        return view('cursos.crear');
+        $curso = new Curso();
+        $certificado = Certificacion::pluck('nombre_curso', 'id');
+        return view('curso.create', compact('curso', 'certificado'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'nombre_grupo' => 'required',
-            'mes_dictado' => 'required',
-            'anio_dictado' => 'required'
-        ]);
-        Curso::create($request->all());
-        return redirect()->route('cursos.index');
+        request()->validate(Curso::$rules);
+
+        $curso = Curso::create($request->all());
+
+        return redirect()->route('cursos.index')
+            ->with('success', 'Curso creado correctamente.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $curso = Curso::find($id);
+
+        return view('curso.show', compact('curso'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $curso = Curso::find($id);
-        return view('cursos.editar', compact('cursos'));
+        $certificado = Certificacion::pluck('nombre_curso', 'id');
+
+        return view('curso.edit', compact('curso', 'certificado'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  Curso $curso
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Curso $curso)
     {
-        request()->validate([
-            'nombre_grupo' => 'required',
-            'mes_dictado' => 'required',
-            'anio_dictado' => 'required'
-        ]);
+        request()->validate(Curso::$rules);
+
         $curso->update($request->all());
-        return redirect()->route('cursos.index');
+
+        return redirect()->route('cursos.index')
+            ->with('success', 'Curso updated successfully');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy(Curso $curso)
+    public function destroy($id)
     {
-        $curso->delete();
-        return redirect()->route('cursos.index');
+        $curso = Curso::find($id)->delete();
+
+        return redirect()->route('cursos.index')
+            ->with('success', 'Curso deleted successfully');
     }
 }
