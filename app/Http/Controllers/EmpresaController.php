@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Empresa;
+use Illuminate\Http\Request;
 
+/**
+ * Class EmpresaController
+ * @package App\Http\Controllers
+ */
 class EmpresaController extends Controller
 {
-    function __construct()
-    {
-        $this->middleware('permission:ver-empresa|crear-empresa|editar-empresa|borrar-empresa', ['only' => ['index']]);
-        $this->middleware('permission:editar-empresa', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:borrar-empresa', ['only' => ['destroy']]);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +18,10 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $empresas = Empresa::paginate(5);
-        return view('empresas.index', compact('empresas'));
+        $empresas = Empresa::paginate();
+
+        return view('empresa.index', compact('empresas'))
+            ->with('i', (request()->input('page', 1) - 1) * $empresas->perPage());
     }
 
     /**
@@ -32,74 +31,79 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        return view('empresas.crear');
+        $empresa = new Empresa();
+        return view('empresa.create', compact('empresa'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'nombre_empresa' => 'required',
-            'cuit' => 'required',
-        ]);
-        Empresa::create($request->all());
-        return redirect()->route('empresas.index');
+        request()->validate(Empresa::$rules);
+
+        $empresa = Empresa::create($request->all());
+
+        return redirect()->route('empresas.index')
+            ->with('success', 'Empresa created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
+        $empresa = Empresa::find($id);
+
+        return view('empresa.show', compact('empresa'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $empresa = Empresa::find($id);
-        return view('empresas.editar', compact('empresa'));
+
+        return view('empresa.edit', compact('empresa'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  Empresa $empresa
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Empresa $empresa)
     {
-        request()->validate([
-            'nombre_empresa' => 'required',
-            'cuit' => ['required', 'max:11'],
-        ]);
+        request()->validate(Empresa::$rules);
 
         $empresa->update($request->all());
-        return redirect()->route('empresas.index');
+
+        return redirect()->route('empresas.index')
+            ->with('success', 'Empresa updated successfully');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy(Empresa $empresa)
+    public function destroy($id)
     {
-        $empresa->delete();
-        return redirect()->route('empresas.index');
+        $empresa = Empresa::find($id)->delete();
+
+        return redirect()->route('empresas.index')
+            ->with('success', 'Empresa deleted successfully');
     }
 }
