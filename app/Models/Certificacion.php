@@ -2,16 +2,48 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Certificacion
+ *
+ * @property $id
+ * @property $nombre_curso
+ * @property $slug_curso
+ * @property $validez
+ * @property $created_at
+ * @property $updated_at
+ *
+ * @property Curso[] $cursos
+ * @package App
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ */
 class Certificacion extends Model
 {
-    use HasFactory;
-    protected $fillable = ['nombre_curso', 'slug_curso', 'validez'];
+    
+    static $rules = [
+		'nombre_curso' => 'required',
+		'slug_curso' => 'required',
+		'validez' => 'required',
+    ];
 
-    public function certificacion()
+    protected $perPage = 20;
+
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['nombre_curso','slug_curso','validez'];
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cursos()
     {
-        return $this->hasMany(Curso::class, 'id');
+        return $this->hasMany('App\Models\Curso', 'certificacion_id', 'id');
     }
+    
+
 }
