@@ -2,26 +2,36 @@
     <a class="nav-link" href="/home">
         <i class=" fas fa-home"></i><span>Home</span>
     </a>
+    @can('ver-alumnos')
     <a class="nav-link" href="/alumnos">
         <i class=" fas fa-user-graduate"></i><span>Alumnos</span>
     </a>
+    @endcan
+    @can('ver-empresa')
     <a class="nav-link" href="/empresas">
         <i class=" fas fa-building"></i><span>Empresas</span>
     </a>
+    @endcan
+    @can('ver-grupos')
     <a class="nav-link" href="/cursos">
         <i class=" fas fa-chalkboard "></i><span>Grupos</span>
     </a>
+    @endcan
+    @can('ver-certificado')
     <a class="nav-link" href="/certificaciones">
-        @can('ver-certificado')
         <i class=" fas  fa-certificate"></i><span>Cursos</span>
-        @endcan
     </a>
+    @endcan
+    @can('ver-usuarios')
     <a class="nav-link" href="/usuarios">
         <i class=" fas fa-users"></i><span>Usuarios</span>
     </a>
+    @endcan
+    @can('ver-rol')
     <a class="nav-link" href="/roles">
-        @can('ver-rol')
+
         <i class=" fas fa-user-shield"></i><span>Roles</span>
-        @endcan
+
     </a>
+    @endcan
 </li>

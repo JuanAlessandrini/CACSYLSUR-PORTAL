@@ -20,30 +20,28 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Certificacion extends Model
 {
-    
-    static $rules = [
-		'nombre_curso' => 'required',
-		'slug_curso' => 'required',
-		'validez' => 'required',
-    ];
 
-    protected $perPage = 20;
+  static $rules = [
+    'nombre_curso' => 'required',
+    'slug_curso' => 'required',
+    'validez' => 'required'
+  ];
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['nombre_curso','slug_curso','validez'];
+  protected $perPage = 20;
+
+  /**
+   * Attributes that should be mass-assignable.
+   *
+   * @var array
+   */
+  protected $fillable = ['nombre_curso', 'slug_curso', 'validez'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function cursos()
-    {
-        return $this->hasMany('App\Models\Curso', 'certificacion_id', 'id');
-    }
-    
-
+  /**
+   * @return \Illuminate\Database\Eloquent\Relations\HasMany
+   */
+  public function cursos()
+  {
+    return $this->hasMany('App\Models\Curso', 'certificacion_id', 'id');
+  }
 }

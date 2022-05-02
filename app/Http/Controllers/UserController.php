@@ -132,4 +132,10 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect()->route('usuarios.index');
     }
+
+    public function contador()
+    {
+        $cant_usuarios = User::count();
+        return $cant_usuarios;
+    }
 }

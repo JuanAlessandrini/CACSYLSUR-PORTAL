@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
  */
 class CursoController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:ver-curso|crear-curso|editar-curso|borrar-curso', ['only' => ['index']]);
+        $this->middleware('permission:crear-curso', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-curso', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:borrar-curso', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -94,7 +102,7 @@ class CursoController extends Controller
         $curso->update($request->all());
 
         return redirect()->route('cursos.index')
-            ->with('success', 'Curso updated successfully');
+            ->with('success', 'Curso actualizado correctamente');
     }
 
     /**
