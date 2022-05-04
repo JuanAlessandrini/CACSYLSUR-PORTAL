@@ -17,7 +17,7 @@
         <i class=" fas fa-chalkboard "></i><span>Grupos</span>
     </a>
     @endcan
-    @can('ver-certificado')
+    @can('ver-curso')
     <a class="nav-link" href="/certificaciones">
         <i class=" fas  fa-certificate"></i><span>Cursos</span>
     </a>

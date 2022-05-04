@@ -27,7 +27,7 @@ class SeederTablePermisos extends Seeder
             'editar-rol',
             'borrar-rol',
 
-            //tabla certificados
+            //tabla cursos
             'ver-certificado',
             'crear-certificado',
             'editar-certificado',
@@ -38,6 +38,26 @@ class SeederTablePermisos extends Seeder
             'crear-empresa',
             'editar-empresa',
             'borrar-empresa',
+            //tabla grupos
+            'ver-grupo',
+            'crear-grupo',
+            'editar-grupo',
+            'borrar-grupo',
+            //tabla usuarios
+            'ver-usuarios',
+            'crear-usuarios',
+            'editar-usuarios',
+            'borrar-usuarios',
+            //tabla alumnos
+            'ver-alumno',
+            'crear-alumno',
+            'editar-alumno',
+            'borrar-alumno',
+            //tabla inscripciones
+            'ver-inscripcion',
+            'crear-inscripcion',
+            'editar-inscripcion',
+            'borrar-inscripcion',
 
         ];
         foreach ($permisos as $permiso) {

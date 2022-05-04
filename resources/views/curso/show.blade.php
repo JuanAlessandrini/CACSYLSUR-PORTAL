@@ -16,9 +16,11 @@
                     <!-- <div class="float-left">
                         <span class="card-title">Show Curso</span>
                     </div> -->
+                    @can('ver-curso')
                     <div class="float-right">
                         <a class="btn btn-primary" href="{{ route('cursos.index') }}"> Atras</a>
                     </div>
+                    @endcan
                 </div>
 
                 <div class="card-body">
