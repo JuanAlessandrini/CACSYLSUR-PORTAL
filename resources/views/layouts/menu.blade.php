@@ -24,12 +24,12 @@
     @endcan
     @can('ver-curso')
     <a class="nav-link" href="/inscripciones">
-        <i class=" fas  fa-certificate"></i><span>Inscripciones</span>
+        <i class=" fas  fa-file"></i><span>Inscripciones</span>
     </a>
     @endcan
     @can('ver-curso')
     <a class="nav-link" href="/calificaciones">
-        <i class=" fas  fa-certificate"></i><span>Notas</span>
+        <i class=" fas  fa-sort-numeric-down"></i><span>Notas</span>
     </a>
     @endcan
     @can('ver-usuarios')
