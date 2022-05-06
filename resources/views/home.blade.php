@@ -27,67 +27,52 @@
 
 
 
-                            <!-- @can('ver-roles')
-                            <div class="col-md-4 col-xl-4">
-                                <div class="card bg-c-green order-card">
-                                    <div class="card-block">
-                                        <h5>Roles</h5>
 
 
-                                        use Spatie\Permission\Models\Role;
-                                        $cant_roles = Role::count();
-
-                                        <h2 class="text-right"><i class="fa fa-user-shield f-left"></i><span>{{$cant_roles}}</span></h2>
-                                        <p class="m-b-0 text-right"><a href="/roles" class="text-white">Ver más</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                            @endcan -->
-                            @can('ver-cursos')
                             <div class="col-md-4 col-xl-4">
                                 <div class="card bg-c-pink order-card">
                                     <div class="card-block">
                                         <h5>Cursos</h5>
-
+                                        @php
                                         use App\Models\Certificacion;
                                         $cant_cert = Certificacion::count();
-
+                                        @endphp
                                         <h2 class="text-right"><i class="fa fa-certificate f-left"></i><span>{{$cant_cert}}</span></h2>
                                         <p class="m-b-0 text-right"><a href="/certificaciones" class="text-white">Ver más</a></p>
                                     </div>
                                 </div>
                             </div>
-                            @endcan
-                            @can('ver-cursos')
+
+
                             <div class="col-md-4 col-xl-4">
                                 <div class="card bg-c-pink order-card">
                                     <div class="card-block">
                                         <h5>Grupos</h5>
-
+                                        @php
                                         use App\Models\Curso;
                                         $cant_cert = Curso::count();
-
+                                        @endphp
                                         <h2 class="text-right"><i class="fa fa-chalkboard f-left"></i><span>{{$cant_cert}}</span></h2>
                                         <p class="m-b-0 text-right"><a href="/cursos" class="text-white">Ver más</a></p>
                                     </div>
                                 </div>
                             </div>
-                            @endcan
-                            @can('ver-empresas')
+
+
                             <div class="col-md-4 col-xl-4">
                                 <div class="card bg-c-pink order-card">
                                     <div class="card-block">
                                         <h5>Empresas</h5>
-
+                                        @php
                                         use App\Models\Empresa;
                                         $cant_cert = Empresa::count();
-
+                                        @endphp
                                         <h2 class="text-right"><i class="fa fa-building f-left"></i><span>{{$cant_cert}}</span></h2>
                                         <p class="m-b-0 text-right"><a href="/empresas" class="text-white">Ver más</a></p>
                                     </div>
                                 </div>
                             </div>
-                            @endcan
+
                             <div class="col-md-4 col-xl-4">
                                 <div class="card bg-c-orange order-card">
                                     <div class="card-block">
