@@ -39,7 +39,7 @@
                     </div>
                     <div class="form-group">
                         <strong>Curso:</strong>
-                        {{ $curso->certificado->nombre_curso }}
+                        {{ $curso->nombre_curso }}
                     </div>
                     <div class="form-group">
                         <strong>Estado:</strong>

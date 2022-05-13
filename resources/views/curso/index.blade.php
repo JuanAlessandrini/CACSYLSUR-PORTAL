@@ -61,7 +61,7 @@ Curso
                                     <td>{{ $curso->nombre_grupo }}</td>
                                     <td>{{ $curso->mes_dictado }}</td>
                                     <td>{{ $curso->anio_dictado }}</td>
-                                    <td>{{ $curso->certificado->nombre_curso }}</td>
+                                    <td>{{ $curso->nombre_curso }}</td>
                                     <td>{{ $curso->estado }}</td>
 
                                     <td>
