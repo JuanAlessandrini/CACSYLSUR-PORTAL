@@ -6,6 +6,7 @@ use App\Models\Inscripcione;
 use App\Models\Alumno;
 use App\Models\Curso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class InscripcioneController
@@ -21,7 +22,10 @@ class InscripcioneController extends Controller
     public function index()
     {
         $inscripciones = Inscripcione::paginate();
-        $alumno = Alumno::pluck('nombre', 'id');
+        // $alumno = Alumno::pluck('nombre', 'id');
+        $alumno = DB::table('alumnos')
+            ->select('nombre', 'apellido', 'id')
+            ->get();
         $curso = Curso::pluck('nombre_grupo', 'id');
         return view('inscripcione.index', compact('inscripciones', 'alumno', 'curso'))
             ->with('i', (request()->input('page', 1) - 1) * $inscripciones->perPage());
@@ -35,7 +39,7 @@ class InscripcioneController extends Controller
     public function create()
     {
         $inscripcione = new Inscripcione();
-        $alumno = Alumno::pluck('nombre', 'id');
+        $alumno = Alumno::select(DB::raw("CONCAT(nombre,' ', apellido) AS nombre"), "id")->pluck('nombre', 'id');
         $curso = Curso::pluck('nombre_grupo', 'id');
         return view('inscripcione.create', compact('inscripcione', 'alumno', 'curso'));
     }
@@ -78,7 +82,7 @@ class InscripcioneController extends Controller
     public function edit($id)
     {
         $inscripcione = Inscripcione::find($id);
-        $alumno = Alumno::pluck('nombre', 'id');
+        $alumno = Alumno::select(DB::raw("CONCAT(nombre,' ', apellido) AS nombre"), "id")->pluck('nombre', 'id');
         $curso = Curso::pluck('nombre_grupo', 'id');
 
         return view('inscripcione.edit', compact('inscripcione', 'alumno', 'curso'));
