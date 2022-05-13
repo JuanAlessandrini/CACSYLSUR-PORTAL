@@ -36,19 +36,17 @@ Curso
                     <p>{{ $message }}</p>
                 </div>
                 @endif
-
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead class="thead">
                                 <tr>
-                                    <th>No</th>
 
                                     <th>Nombre Grupo</th>
                                     <th>Mes Dictado</th>
                                     <th>Año Dictado</th>
                                     <th>Curso</th>
-                                    <th>Estado</th>
+
 
                                     <th></th>
                                 </tr>
@@ -56,13 +54,11 @@ Curso
                             <tbody>
                                 @foreach ($cursos as $curso)
                                 <tr>
-                                    <td>{{ ++$i }}</td>
 
                                     <td>{{ $curso->nombre_grupo }}</td>
                                     <td>{{ $curso->mes_dictado }}</td>
                                     <td>{{ $curso->anio_dictado }}</td>
-                                    <td>{{ $curso->nombre_curso }}</td>
-                                    <td>{{ $curso->estado }}</td>
+                                    <td>{{ $curso->certificado->nombre_curso }}</td>
 
                                     <td>
                                         <form action="{{ route('cursos.destroy',$curso->id) }}" method="POST">

@@ -25,27 +25,53 @@
 
                 <div class="card-body">
 
-                    <div class="form-group">
-                        <strong>Nombre Grupo:</strong>
-                        {{ $curso->nombre_grupo }}
+                    <div class="row">
+                        <div class="col">
+                            <h4>Grupo: {{ $curso->nombre_grupo }}</h4>
+                        </div>
+                        <div class="col">
+                            <h4>Curso: {{ $curso->certificado->nombre_curso }}</h4>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <strong>Mes Dictado:</strong>
-                        {{ $curso->mes_dictado }}
-                    </div>
-                    <div class="form-group">
-                        <strong>Año Dictado:</strong>
-                        {{ $curso->anio_dictado }}
-                    </div>
-                    <div class="form-group">
-                        <strong>Curso:</strong>
-                        {{ $curso->nombre_curso }}
-                    </div>
-                    <div class="form-group">
-                        <strong>Estado:</strong>
-                        {{ $curso->estado }}
-                    </div>
+                    <div class="clearfix"><br></div>
 
+                    <h5 class="display-5">Alumnos</h5>
+                    <div class="row">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead class="thead">
+                                        <tr>
+                                            <th>No</th>
+
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>Dni</th>
+                                            <th>Empresa</th>
+
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($alumnos as $alumno)
+                                        <tr>
+
+
+                                            <td>{{ $alumno->nombre }}</td>
+                                            <td>{{ $alumno->apellido }}</td>
+                                            <td>{{ $alumno->dni }}</td>
+
+
+                                            <td>
+                                                <!--  -->
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

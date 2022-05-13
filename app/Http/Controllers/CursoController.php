@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Curso;
 use App\Models\Certificacion;
+use App\Models\Alumno;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CursoController
@@ -70,8 +72,14 @@ class CursoController extends Controller
     public function show($id)
     {
         $curso = Curso::find($id);
-
-        return view('curso.show', compact('curso'));
+        //SELECT a.nombre , a.apellido FROM `inscripciones` JOIN alumnos a ON inscripciones.alumno_id = a.id WHERE grupo_id= 1;
+        $alumnos = DB::table('inscripciones')
+            ->join('alumnos', 'inscripciones.alumno_id', '=', 'alumnos.id')
+            ->select('alumnos.nombre', 'alumnos.apellido', 'alumnos.dni')
+            ->where('inscripciones.grupo_id', $id)
+            ->get();
+        $certificacion = Certificacion::pluck('nombre_curso', 'id');
+        return view('curso.show', compact('curso', 'alumnos'));
     }
 
     /**
