@@ -15,9 +15,11 @@ Update Inscripcione
             @includeif('partials.errors')
 
             <div class="card card-default">
-                <!-- <div class="card-header">
-                    <span class="card-title">Update Inscripcione</span>
-                </div> -->
+                 <div class="card-header">
+                    <div class="float-right">
+                        <a class="btn btn-primary" href="{{ route('cursos.index') }}"> atras</a>
+                    </div>
+                </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('inscripciones.update', $inscripcione->id) }}" role="form" enctype="multipart/form-data">
                         {{ method_field('PATCH') }}

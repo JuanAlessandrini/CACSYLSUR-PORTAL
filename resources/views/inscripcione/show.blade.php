@@ -17,7 +17,7 @@
                         <span class="card-title">Show Inscripcione</span>
                     </div> -->
                     <div class="float-right">
-                        <a class="btn btn-primary" href="{{ route('inscripciones.index') }}"> atras</a>
+                        <a class="btn btn-primary" href="{{ route('cursos.index') }}"> atras</a>
                     </div>
                 </div>
 

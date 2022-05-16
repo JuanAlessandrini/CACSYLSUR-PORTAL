@@ -56,7 +56,7 @@ class InscripcioneController extends Controller
 
         $inscripcione = Inscripcione::create($request->all());
 
-        return redirect()->route('inscripciones.index')
+        return redirect()->route('cursos.index')
             ->with('success', 'Inscripcion realizada.');
     }
 
@@ -114,7 +114,7 @@ class InscripcioneController extends Controller
     {
         $inscripcione = Inscripcione::find($id)->delete();
 
-        return redirect()->route('inscripciones.index')
+        return redirect()->route('cursos.index')
             ->with('success', 'Inscripcion borrada correctamente');
     }
 }

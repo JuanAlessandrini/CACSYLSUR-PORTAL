@@ -75,7 +75,7 @@ class CursoController extends Controller
         //SELECT a.nombre , a.apellido FROM `inscripciones` JOIN alumnos a ON inscripciones.alumno_id = a.id WHERE grupo_id= 1;
         $alumnos = DB::table('inscripciones')
             ->join('alumnos', 'inscripciones.alumno_id', '=', 'alumnos.id')
-            ->select('alumnos.nombre', 'alumnos.apellido', 'alumnos.dni')
+            ->select('alumnos.nombre', 'alumnos.apellido','alumnos.id', 'alumnos.dni','inscripciones.id AS INSID')
             ->where('inscripciones.grupo_id', $id)
             ->get();
         $certificacion = Certificacion::pluck('nombre_curso', 'id');
