@@ -21,9 +21,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
-            $table->string('mes_dictado');
-            $table->string('anio_dictado');
-            $table->string('estado');
+            $table->date('anio_dictado');
             $table->timestamps();
         });
     }

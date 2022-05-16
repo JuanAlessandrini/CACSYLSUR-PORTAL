@@ -43,8 +43,7 @@ Curso
                                 <tr>
 
                                     <th>Nombre Grupo</th>
-                                    <th>Mes Dictado</th>
-                                    <th>Año Dictado</th>
+                                    <th>Fecha Dictado</th>
                                     <th>Curso</th>
 
 
@@ -56,7 +55,6 @@ Curso
                                 <tr>
 
                                     <td>{{ $curso->nombre_grupo }}</td>
-                                    <td>{{ $curso->mes_dictado }}</td>
                                     <td>{{ $curso->anio_dictado }}</td>
                                     <td>{{ $curso->certificado->nombre_curso }}</td>
 

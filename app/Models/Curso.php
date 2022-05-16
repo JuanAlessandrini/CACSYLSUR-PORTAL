@@ -22,9 +22,8 @@ class Curso extends Model
 
   static $rules = [
     'nombre_grupo' => 'required',
-    'mes_dictado' => 'required',
     'anio_dictado' => 'required',
-    'estado' => 'required'
+    'certificacion_id'=>'required'
   ];
 
   protected $perPage = 20;
@@ -34,7 +33,7 @@ class Curso extends Model
    *
    * @var array
    */
-  protected $fillable = ['nombre_grupo', 'certificacion_id', 'mes_dictado', 'anio_dictado', 'estado'];
+  protected $fillable = ['nombre_grupo', 'certificacion_id', 'anio_dictado'];
   /**
    * @return \Illuminate\Database\Eloquent\Relations\HasOne
    */
