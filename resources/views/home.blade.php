@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-
+                            @can('ver-usuarios')
                             <div class="col-md-4 col-xl-4">
 
                                 <div class="card bg-c-blue order-card">
@@ -24,11 +24,11 @@
                                 </div>
 
                             </div>
+                            @endcan
 
 
 
-
-
+                            
                             <div class="col-md-4 col-xl-4">
                                 <div class="card bg-c-pink order-card">
                                     <div class="card-block">
@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
 
                             <div class="col-md-4 col-xl-4">
                                 <div class="card bg-c-pink order-card">

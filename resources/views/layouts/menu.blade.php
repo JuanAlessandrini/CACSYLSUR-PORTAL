@@ -14,7 +14,7 @@
     @endcan
     @can('ver-grupos')
     <a class="nav-link" href="/cursos">
-        <i class=" fas fa-chalkboard "></i><span>Grupos</span>
+        <i class=" fas fa-chalkboard "></i><span>Cursada</span>
     </a>
     @endcan
     @can('ver-curso')
