@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            @can('ver-usuarios')
+                            @can('ver-usuario')
                             <div class="col-md-4 col-xl-4">
 
                                 <div class="card bg-c-blue order-card">
@@ -28,7 +28,7 @@
 
 
 
-                            @can('ver-certificacion')
+                            @can('ver-curso')
                             <div class="col-md-4 col-xl-4">
                                 <div class="card bg-c-pink order-card">
                                     <div class="card-block">
@@ -40,11 +40,11 @@
                                 </div>
                             </div>
                             @endcan
-                            @can('ver-curso')
+                            @can('ver-grupo')
                             <div class="col-md-4 col-xl-4">
                                 <div class="card bg-c-pink order-card">
                                     <div class="card-block">
-                                        <h5>Grupos</h5>
+                                        <h5>Cursada</h5>
                                         @inject('cant_usuarios','App\Http\Controllers\CursoController')
                                         <h2 class="text-right"><i class="fa fa-chalkboard f-left"></i><span>{{$cant_usuarios->contador()}}</span></h2>
                                         <p class="m-b-0 text-right"><a href="/cursos" class="text-white">Ver más</a></p>
