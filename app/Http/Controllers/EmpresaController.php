@@ -44,11 +44,17 @@ class EmpresaController extends Controller
     public function store(Request $request)
     {
         request()->validate(Empresa::$rules);
+        $existe = Empresa::where('cuit', '=', $request->input('cuit'))->first();
+        if ($existe === null) {
 
-        $empresa = Empresa::create($request->all());
+            $empresa = Empresa::create($request->all());
 
-        return redirect()->route('empresas.index')
-            ->with('success', 'Empresa created successfully.');
+            return redirect()->route('empresas.index')
+                ->with('success', 'Empresa creada correctamente.');
+        } else {
+            return redirect()->route('empresas.create')
+                ->with('error', 'La empresa no se pudo crear por que el cuit ya esta registrado.');
+        }
     }
 
     /**
@@ -91,7 +97,7 @@ class EmpresaController extends Controller
         $empresa->update($request->all());
 
         return redirect()->route('empresas.index')
-            ->with('success', 'Empresa updated successfully');
+            ->with('success', 'Empresa editada correctamente');
     }
 
     /**
@@ -104,7 +110,7 @@ class EmpresaController extends Controller
         $empresa = Empresa::find($id)->delete();
 
         return redirect()->route('empresas.index')
-            ->with('success', 'Empresa deleted successfully');
+            ->with('success', 'Empresa borrada');
     }
     public function contador()
     {

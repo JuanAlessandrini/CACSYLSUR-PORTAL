@@ -1,36 +1,41 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Create Empresa
+Create Empresa
 @endsection
 
 @section('content')
-    <section class="section">
-        <div class="section-header">
-            <h3 class="page__heading">Crear Empresas</h3>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
+<section class="section">
+    <div class="section-header">
+        <h3 class="page__heading">Crear Empresas</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
 
-                @includeif('partials.errors')
+            @includeif('partials.errors')
+            @if ($message = Session::get('error'))
+            <div class="alert alert alert-warning">
+                <p>{{ $message }}</p>
+            </div>
+            @endif
 
-                <div class="card card-default">
-                    <div class="card-header">
-                        {{-- <span class="card-title">Crear Empresa</span> --}}
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('empresas.index') }}"> Atras</a>
-                        </div>
+            <div class="card card-default">
+                <div class="card-header">
+                    {{-- <span class="card-title">Crear Empresa</span> --}}
+                    <div class="float-right">
+                        <a class="btn btn-primary" href="{{ route('empresas.index') }}"> Atras</a>
                     </div>
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('empresas.store') }}"  role="form" enctype="multipart/form-data">
-                            @csrf
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('empresas.store') }}" role="form" enctype="multipart/form-data">
+                        @csrf
 
-                            @include('empresa.form')
+                        @include('empresa.form')
 
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 @endsection

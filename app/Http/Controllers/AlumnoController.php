@@ -48,11 +48,16 @@ class AlumnoController extends Controller
     public function store(Request $request)
     {
         request()->validate(Alumno::$rules);
+        $existe = Alumno::where('dni', '=', $request->input('dni'))->first();
+        if ($existe === null) {
+            $alumno = Alumno::create($request->all());
 
-        $alumno = Alumno::create($request->all());
-
-        return redirect()->route('alumnos.index')
-            ->with('success', 'Alumno creado exitosamente.');
+            return redirect()->route('alumnos.index')
+                ->with('success', 'Alumno creado exitosamente.');
+        } else {
+            return redirect()->route('alumnos.create')
+                ->with('error', 'El alumno no se pudo crear por que el dni ya esta registrado.');
+        }
     }
 
     /**

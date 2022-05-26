@@ -14,6 +14,11 @@ Create Alumno
         <div class="col-md-12">
 
             @includeif('partials.errors')
+            @if ($message = Session::get('error'))
+            <div class="alert alert alert-warning">
+                <p>{{ $message }}</p>
+            </div>
+            @endif
 
             <div class="card card-default">
 
