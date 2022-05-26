@@ -22,24 +22,53 @@
                 </div>
 
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h3> {{ $alumno->nombre }} {{ $alumno->apellido }}</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span><i class="fas fa-id-card"></i> {{ $alumno->dni }}</span> |
+                            <span><i class="fas fa-building"></i> {{ $alumno->empresa->nombre_empresa }}</span>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col ">
+                            <h5 class="">Cursos Realizados</h5>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead class="thead">
+                                        <tr>
 
-                    <div class="form-group">
-                        <strong>Nombre:</strong>
-                        {{ $alumno->nombre }}
-                    </div>
-                    <div class="form-group">
-                        <strong>Apellido:</strong>
-                        {{ $alumno->apellido }}
-                    </div>
-                    <div class="form-group">
-                        <strong>Dni:</strong>
-                        {{ $alumno->dni }}
-                    </div>
-                    <div class="form-group">
-                        <strong>Empresa:</strong>
-                        {{ $alumno->empresa->nombre_empresa }}
-                    </div>
 
+                                            <th>Curso</th>
+                                            <th>Realizado</th>
+                                            <th>Estado</th>
+
+
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr></tr>
+
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <button type="submit" class="btn btn-primaru btn-sm"><i class="fa fa-fw fa-download"></i> Descargar</button>
+
+                                        </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
