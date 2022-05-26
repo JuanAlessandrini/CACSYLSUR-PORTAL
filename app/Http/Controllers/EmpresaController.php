@@ -16,6 +16,13 @@ class EmpresaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        $this->middleware('permission:ver-empresa|crear-empresa|editar-empresa|borrar-empresa', ['only' => ['index']]);
+        $this->middleware('permission:crear-empresa', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-empresa', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:borrar-empresa', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $empresas = Empresa::paginate();

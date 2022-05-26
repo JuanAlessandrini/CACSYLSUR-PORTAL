@@ -20,6 +20,14 @@ class AlumnoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct()
+    {
+        $this->middleware('permission:ver-alumno|crear-alumno|editar-alumno|borrar-alumno', ['only' => ['index']]);
+        $this->middleware('permission:crear-alumno', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-alumno', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:borrar-alumno', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $user = Auth::user()->name;

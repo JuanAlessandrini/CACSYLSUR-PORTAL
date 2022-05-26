@@ -16,6 +16,13 @@ class CalificacioneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        $this->middleware('permission:ver-calificacion|crear-calificacion|editar-calificaicon|borrar-calificacion', ['only' => ['index']]);
+        $this->middleware('permission:crear-calificacion', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-calificacion', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:borrar-calificaiocn', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $calificaciones = Calificacione::paginate();
