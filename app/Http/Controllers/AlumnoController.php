@@ -138,7 +138,14 @@ class AlumnoController extends Controller
     }
     public function contador()
     {
-        $cant_usuarios = Alumno::count();
-        return $cant_usuarios;
+        $user = Auth::user()->name;
+        $id_empresa = DB::table('empresas')->select('id')->where('nombre_empresa', '=', $user)->first();
+        if ($user === 'superadmin' || $user === 'administrador') {
+            $cant_usuarios = Alumno::count();
+            return $cant_usuarios;
+        } else {
+            $cant_usuarios = DB::table('alumnos')->select('*')->where('empresa_id', '=', $id_empresa->id)->count();
+            return $cant_usuarios;
+        }
     }
 }
