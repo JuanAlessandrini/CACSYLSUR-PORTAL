@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alumno;
+use App\Models\Curso;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
 
@@ -109,5 +110,10 @@ class AlumnoController extends Controller
 
         return redirect()->route('alumnos.index')
             ->with('success', 'Alumno borrado correctamente');
+    }
+    public function contador()
+    {
+        $cant_usuarios = Alumno::count();
+        return $cant_usuarios;
     }
 }

@@ -2,7 +2,7 @@
     <a class="nav-link" href="/home">
         <i class=" fas fa-home"></i><span>Home</span>
     </a>
-    @can('ver-alumnos')
+    @can('ver-alumno')
     <a class="nav-link" href="/alumnos">
         <i class=" fas fa-user-graduate"></i><span>Alumnos</span>
     </a>
@@ -12,7 +12,7 @@
         <i class=" fas fa-building"></i><span>Empresas</span>
     </a>
     @endcan
-    @can('ver-grupos')
+    @can('ver-grupo')
     <a class="nav-link" href="/cursos">
         <i class=" fas fa-chalkboard "></i><span>Cursada</span>
     </a>
@@ -22,12 +22,12 @@
         <i class=" fas  fa-certificate"></i><span>Cursos</span>
     </a>
     @endcan
-    @can('ver-curso')
+    @can('ver-usuario')
     <a class="nav-link" href="/calificaciones">
         <i class=" fas  fa-sort-numeric-down"></i><span>Notas</span>
     </a>
     @endcan
-    @can('ver-usuarios')
+    @can('ver-usuario')
     <a class="nav-link" href="/usuarios">
         <i class=" fas fa-users"></i><span>Usuarios</span>
     </a>

@@ -75,7 +75,7 @@ class CursoController extends Controller
         //SELECT a.nombre , a.apellido FROM `inscripciones` JOIN alumnos a ON inscripciones.alumno_id = a.id WHERE grupo_id= 1;
         $alumnos = DB::table('inscripciones')
             ->join('alumnos', 'inscripciones.alumno_id', '=', 'alumnos.id')
-            ->select('alumnos.nombre', 'alumnos.apellido','alumnos.id', 'alumnos.dni','inscripciones.id AS INSID')
+            ->select('alumnos.nombre', 'alumnos.apellido', 'alumnos.id', 'alumnos.dni', 'inscripciones.id AS INSID')
             ->where('inscripciones.grupo_id', $id)
             ->get();
         $certificacion = Certificacion::pluck('nombre_curso', 'id');
@@ -124,5 +124,10 @@ class CursoController extends Controller
 
         return redirect()->route('cursos.index')
             ->with('success', 'Curso deleted successfully');
+    }
+    public function contador()
+    {
+        $cant_usuarios = Curso::count();
+        return $cant_usuarios;
     }
 }

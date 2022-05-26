@@ -114,4 +114,9 @@ class CertificacionController extends Controller
         return redirect()->route('certificaciones.index')
             ->with('success', 'Curso borrado');
     }
+    public function contador()
+    {
+        $cant_usuarios = Certificacion::count();
+        return $cant_usuarios;
+    }
 }

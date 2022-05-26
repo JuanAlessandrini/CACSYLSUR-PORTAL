@@ -106,4 +106,9 @@ class EmpresaController extends Controller
         return redirect()->route('empresas.index')
             ->with('success', 'Empresa deleted successfully');
     }
+    public function contador()
+    {
+        $cant_usuarios = Empresa::count();
+        return $cant_usuarios;
+    }
 }
