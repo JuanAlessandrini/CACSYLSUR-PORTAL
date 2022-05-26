@@ -18,12 +18,14 @@ Alumno
                         <!-- <span id="card_title">
                             {{ __('Alumno') }}
                         </span> -->
-
+                        @can('crear-alumno')
                         <div class="float-right">
                             <a href="{{ route('alumnos.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
                                 {{ __('Crear Nuevo') }}
                             </a>
+
                         </div>
+                        @endcan
                     </div>
                 </div>
                 @if ($message = Session::get('success'))

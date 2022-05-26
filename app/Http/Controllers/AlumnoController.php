@@ -6,6 +6,8 @@ use App\Models\Alumno;
 use App\Models\Curso;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class AlumnoController
@@ -20,10 +22,20 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        $alumnos = Alumno::paginate();
-        $empresa = Empresa::pluck('nombre_empresa', 'id');
-        return view('alumno.index', compact('alumnos', 'empresa'))
-            ->with('i', (request()->input('page', 1) - 1) * $alumnos->perPage());
+        $user = Auth::user()->name;
+        $id_empresa = DB::table('empresas')->select('id')->where('nombre_empresa', '=', $user)->first();
+
+        if ($user !== 'superadmin') {
+            $alumnos = Alumno::where('empresa_id', '=', $id_empresa->id)->paginate();
+            $empresa = Empresa::pluck('nombre_empresa', 'id');
+            return view('alumno.index', compact('alumnos', 'empresa', 'user'))
+                ->with('i', (request()->input('page', 1) - 1) * $alumnos->perPage());
+        } else {
+            $alumnos = Alumno::paginate();
+            $empresa = Empresa::pluck('nombre_empresa', 'id');
+            return view('alumno.index', compact('alumnos', 'empresa'))
+                ->with('i', (request()->input('page', 1) - 1) * $alumnos->perPage());
+        }
     }
 
     /**
