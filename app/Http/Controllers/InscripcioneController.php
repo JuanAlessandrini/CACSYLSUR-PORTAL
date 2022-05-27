@@ -52,12 +52,23 @@ class InscripcioneController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->file('certificado') != null) {
+            $request->file('certificado')->store('certificados');
+        }
+
         request()->validate(Inscripcione::$rules);
-
-        $inscripcione = Inscripcione::create($request->all());
-
-        return redirect()->route('cursos.index')
-            ->with('success', 'Inscripcion realizada.');
+        $existe = DB::table('inscripciones')->where('alumno_id', '=', $request->input('alumno_id'))->first();
+        //dd($existe);
+        if ($existe === null) {
+            $inscripcion = new Inscripcione;
+            $inscripcion->alumno_id = $request->input('alumno_id');
+            $inscripcion->grupo_id = $request->input('grupo_id');
+            $inscripcion->save();
+            return redirect()->route('cursos.index')
+                ->with('success', 'Inscripcion realizada.');
+        }
+        return redirect()->route('inscripciones.create')
+            ->with('error', 'Inscripcion no realizada: el alumno ya se encuentra en la cursada');
     }
 
     /**

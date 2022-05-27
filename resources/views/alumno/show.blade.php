@@ -30,7 +30,13 @@
                     <div class="row">
                         <div class="col">
                             <span><i class="fas fa-id-card"></i> {{ $alumno->dni }}</span> |
-                            <span><i class="fas fa-building"></i> {{ $alumno->empresa->nombre_empresa }}</span>
+                            <span><i class="fas fa-building"></i>
+                                @isset($alumno->empresa->nombre_empresa)
+                                {{ $alumno->empresa->nombre_empresa }}
+                                @else
+                                Sin empresa
+                            </span>
+                            @endisset
                         </div>
                     </div>
                     <div class="row mt-4">
@@ -45,6 +51,7 @@
                                             <th>Curso</th>
                                             <th>Realizado</th>
                                             <th>Estado</th>
+                                            <th>Nota</th>
 
 
                                             <th></th>
@@ -55,6 +62,7 @@
                                         <tr></tr>
 
 
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
