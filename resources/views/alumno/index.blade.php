@@ -57,7 +57,11 @@ Alumno
                                     <td>{{ $alumno->nombre }}</td>
                                     <td>{{ $alumno->apellido }}</td>
                                     <td>{{ $alumno->dni }}</td>
+                                    @isset($alumno->empresa->nombre_empresa)
                                     <td>{{ $alumno->empresa->nombre_empresa }}</td>
+                                    @else
+                                    <td>Sin empresa</td>
+                                    @endisset
 
                                     <td>
                                         <form action="{{ route('alumnos.destroy',$alumno->id) }}" method="POST">
