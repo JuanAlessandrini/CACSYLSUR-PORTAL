@@ -67,8 +67,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <button type="submit" class="btn btn-primaru btn-sm"><i class="fa fa-fw fa-download"></i> Descargar</button>
-
+                                            <a href="{{ $path }}" class="btn btn-primaru btn-sm"><i class="fa fa-fw fa-download"></i> Descargar</a>
                                         </td>
                                         </tr>
 

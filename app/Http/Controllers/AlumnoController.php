@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Alumno;
 use App\Models\Curso;
 use App\Models\Empresa;
+use App\Models\Archivo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -89,8 +90,10 @@ class AlumnoController extends Controller
     public function show($id)
     {
         $alumno = Alumno::find($id);
-
-        return view('alumno.show', compact('alumno'));
+        $archivo = DB::table('archivos')->where('alumno_id', '=', $id)->first();
+        //dd($archivo);
+        $path = storage_path("app/" . $archivo->certificado);
+        return view('alumno.show', compact('alumno', 'path'));
     }
 
     /**
