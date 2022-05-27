@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Inscripcione;
 use App\Models\Alumno;
 use App\Models\Curso;
+use App\Models\Archivo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -53,7 +54,9 @@ class InscripcioneController extends Controller
     public function store(Request $request)
     {
         if ($request->file('certificado') != null) {
-            $request->file('certificado')->store('certificados');
+            $certificado = $request->file('certificado')->store('certificados');
+        } else {
+            $certificado = null;
         }
 
         request()->validate(Inscripcione::$rules);
@@ -64,6 +67,18 @@ class InscripcioneController extends Controller
             $inscripcion->alumno_id = $request->input('alumno_id');
             $inscripcion->grupo_id = $request->input('grupo_id');
             $inscripcion->save();
+
+            $archivo = new Archivo;
+            $curso_id = DB::table('cursos')->select('certificacion_id')->where('id', '=', $request->input('grupo_id'))->first();
+            //dd($curso_id, $certificado);
+
+            $archivo->alumno_id = $request->input('alumno_id');
+            $archivo->curso_id = 4;
+            $archivo->certificado = $certificado;
+
+            $archivo->save();
+
+
             return redirect()->route('cursos.index')
                 ->with('success', 'Inscripcion realizada.');
         }
