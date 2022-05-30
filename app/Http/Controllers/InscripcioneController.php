@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Inscripcione;
 use App\Models\Alumno;
 use App\Models\Curso;
+use App\Models\Certificacion;
 use App\Models\Archivo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +28,7 @@ class InscripcioneController extends Controller
         $alumno = DB::table('alumnos')
             ->select('nombre', 'apellido', 'id')
             ->get();
-        $curso = Curso::pluck('nombre_grupo', 'id');
+        $curso = Certificacion::pluck('nombre_curso', 'id');
         return view('inscripcione.index', compact('inscripciones', 'alumno', 'curso'))
             ->with('i', (request()->input('page', 1) - 1) * $inscripciones->perPage());
     }
@@ -41,7 +42,7 @@ class InscripcioneController extends Controller
     {
         $inscripcione = new Inscripcione();
         $alumno = Alumno::select(DB::raw("CONCAT(nombre,' ', apellido) AS nombre"), "id")->pluck('nombre', 'id');
-        $curso = Curso::pluck('nombre_grupo', 'id');
+        $curso = Certificacion::pluck('nombre_curso', 'id');
         return view('inscripcione.create', compact('inscripcione', 'alumno', 'curso'));
     }
 
@@ -61,11 +62,12 @@ class InscripcioneController extends Controller
 
         request()->validate(Inscripcione::$rules);
         $existe = DB::table('inscripciones')->where('alumno_id', '=', $request->input('alumno_id'))->first();
-        //dd($existe);
+        //dd($request->input('curso_id'));
         if ($existe === null) {
             $inscripcion = new Inscripcione;
             $inscripcion->alumno_id = $request->input('alumno_id');
-            $inscripcion->grupo_id = $request->input('grupo_id');
+            $inscripcion->grupo_id = $request->input('curso_id');
+            $inscripcion->fecha_dictado = $request->input('fecha_dictado');
             $inscripcion->save();
 
             $archivo = new Archivo;
@@ -79,7 +81,7 @@ class InscripcioneController extends Controller
             $archivo->save();
 
 
-            return redirect()->route('cursos.index')
+            return redirect()->route('inscripciones.index')
                 ->with('success', 'Inscripcion realizada.');
         }
         return redirect()->route('inscripciones.create')
@@ -123,11 +125,33 @@ class InscripcioneController extends Controller
      */
     public function update(Request $request, Inscripcione $inscripcione)
     {
+        if ($request->file('certificado') != null) {
+            $certificado = $request->file('certificado')->store('certificados');
+        } else {
+            $certificado = null;
+        }
         request()->validate(Inscripcione::$rules);
 
-        $inscripcione->update($request->all());
+        //$inscripcione->update($request->all());
+        $existe = DB::table('inscripciones')->where('alumno_id', '=', $request->input('alumno_id'))->first();
+        if ($existe === null) {
+            $inscripcion = new Inscripcione;
+            $inscripcion->alumno_id = $request->input('alumno_id');
+            $inscripcion->grupo_id = $request->input('grupo_id');
+            $inscripcion->update();
 
-        return redirect()->route('inscripciones.index')
+            $archivo = new Archivo;
+            $curso_id = DB::table('cursos')->select('certificacion_id')->where('id', '=', $request->input('grupo_id'))->first();
+            //dd($curso_id, $certificado);
+
+            $archivo->alumno_id = $request->input('alumno_id');
+            $archivo->curso_id = 4;
+            $archivo->certificado = $certificado;
+
+            $archivo->update();
+        }
+
+        return redirect()->route('inscrpciones.index')
             ->with('success', 'Inscripcion actualizada correctamente');
     }
 
@@ -140,7 +164,7 @@ class InscripcioneController extends Controller
     {
         $inscripcione = Inscripcione::find($id)->delete();
 
-        return redirect()->route('cursos.index')
+        return redirect()->route('inscripciones.index')
             ->with('success', 'Inscripcion borrada correctamente');
     }
 }

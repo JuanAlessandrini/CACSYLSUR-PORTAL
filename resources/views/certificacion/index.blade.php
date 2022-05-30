@@ -40,9 +40,8 @@ Certificacion
                                     <th>No</th>
 
                                     <th>Nombre Curso</th>
-                                    <th>Slug Curso</th>
                                     <th>Validez</th>
-
+                                    <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -52,9 +51,12 @@ Certificacion
                                     <td>{{ ++$i }}</td>
 
                                     <td>{{ $certificacion->nombre_curso }}</td>
-                                    <td>{{ $certificacion->slug_curso }}</td>
-                                    <td>{{ $certificacion->validez }}</td>
-
+                                    @if($certificacion->validez === '365')
+                                    <td>1 año</td>
+                                    @else
+                                    <td>2 años</td>
+                                    @endif
+                                    <td></td>
                                     <td>
                                         <form action="{{ route('certificaciones.destroy',$certificacion->id) }}" method="POST">
                                             <a class="btn btn-sm btn-primary " href="{{ route('certificaciones.show',$certificacion->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>

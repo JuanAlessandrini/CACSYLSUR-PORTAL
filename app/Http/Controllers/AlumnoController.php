@@ -6,6 +6,8 @@ use App\Models\Alumno;
 use App\Models\Curso;
 use App\Models\Empresa;
 use App\Models\Archivo;
+use App\Models\Certificacion;
+use App\Models\Inscripcione;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -90,10 +92,16 @@ class AlumnoController extends Controller
     public function show($id)
     {
         $alumno = Alumno::find($id);
+        $cursos = Inscripcione::where('alumno_id', '=', $id)->paginate();
+        $data = DB::table('inscripciones');
         $archivo = DB::table('archivos')->where('alumno_id', '=', $id)->first();
         //dd($archivo);
-        $path = storage_path("app/" . $archivo->certificado);
-        return view('alumno.show', compact('alumno', 'path'));
+        if ($archivo === null) {
+            $path = storage_path("app/#");
+        } else {
+            $path = storage_path("app/" . $archivo->certificado);
+        }
+        return view('alumno.show', compact('alumno', 'data', 'cursos'));
     }
 
     /**
@@ -149,6 +157,19 @@ class AlumnoController extends Controller
         } else {
             $cant_usuarios = DB::table('alumnos')->select('*')->where('empresa_id', '=', $id_empresa->id)->count();
             return $cant_usuarios;
+        }
+    }
+    public function download($id)
+    {
+        $alumno = Alumno::find($id);
+        $archivo = DB::table('archivos')->where('alumno_id', '=', $id)->first();
+        //dd($archivo);
+        if ($archivo === null) {
+            $path = storage_path("app/#");
+            return 'el alumno no posee certificados';
+        } else {
+            $path = storage_path("app/" . $archivo->certificado);
+            return response()->download(file: $path);
         }
     }
 }

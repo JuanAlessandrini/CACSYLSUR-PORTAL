@@ -26,6 +26,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
+            $table->date('fecha_dictado');
             $table->timestamps();
         });
     }

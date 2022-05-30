@@ -53,7 +53,13 @@ class CertificacionController extends Controller
     {
         request()->validate(Certificacion::$rules);
 
-        $certificacion = Certificacion::create($request->all());
+        // $certificacion = Certificacion::create($request->all());
+        $certificacion = new Certificacion();
+        $certificacion->nombre_curso = $request->input('nombre_curso');
+        $certificacion->slug_curso = null;
+        $certificacion->validez = $request->input('validez');
+
+        $certificacion->save();
 
         return redirect()->route('certificaciones.index')
             ->with('success', 'Curso creado correctamente.');
@@ -94,9 +100,14 @@ class CertificacionController extends Controller
      */
     public function update(Request $request, Certificacion $certificacion)
     {
-        request()->validate(Certificacion::$rules);
+        //request()->validate(Certificacion::$rules);
 
-        $certificacion->update($request->all());
+        //$certificacion->update($request->all());
+        // $certificacion->nombre_curso = $request->input('nombre_curso');
+        // $certificacion->slug_curso = null;
+        // $certificacion->validez = $request->input('validez');
+        //$certificacion->update($request->all());
+        dd($request->all());
 
         return redirect()->route('certificaciones.index')
             ->with('success', 'Curso modificado correctamente');

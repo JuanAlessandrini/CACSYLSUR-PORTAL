@@ -22,6 +22,7 @@
                 </div>
 
                 <div class="card-body">
+                    @isset($alumno->nombre)
                     <div class="row">
                         <div class="col">
                             <h3> {{ $alumno->nombre }} {{ $alumno->apellido }}</h3>
@@ -47,10 +48,9 @@
                                     <thead class="thead">
                                         <tr>
 
-
                                             <th>Curso</th>
                                             <th>Realizado</th>
-                                            <th>Estado</th>
+                                            <th>Dias para vencimiento</th>
                                             <th>Nota</th>
 
 
@@ -58,24 +58,32 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($cursos as $curso)
+                                        @isset($curso->certificado->nombre_curso)
+                                        <tr>
 
-                                        <tr></tr>
-
-
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <a href="{{ $path }}" class="btn btn-primaru btn-sm"><i class="fa fa-fw fa-download"></i> Descargar</a>
-                                        </td>
+                                            <td>{{$curso->certificado->nombre_curso}}</td>
+                                            <td>{{$curso->fecha_dictado}}</td>
+                                            <td></td>
+                                            <td>No informada</td>
+                                            <td>
+                                                <a href="{{ route('alumnos.download', $alumno->id) }}" class="btn btn-primaru btn-sm"><i class="fa fa-fw fa-download"></i> Descargar</a>
+                                            </td>
                                         </tr>
-
+                                        @else
+                                        <tr></tr>
+                                        @endisset
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                    @else
+                    <div class="alert alert-danger" role="alert">
+                        El alumno buscado no existe
+                    </div>
+                    @endisset
                 </div>
             </div>
         </div>

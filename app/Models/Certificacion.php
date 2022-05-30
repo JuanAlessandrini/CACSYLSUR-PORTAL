@@ -23,7 +23,6 @@ class Certificacion extends Model
 
   static $rules = [
     'nombre_curso' => 'required',
-    'slug_curso' => 'required',
     'validez' => 'required'
   ];
 
@@ -42,6 +41,6 @@ class Certificacion extends Model
    */
   public function cursos()
   {
-    return $this->hasMany('App\Models\Curso', 'certificacion_id', 'id');
+    return $this->hasMany('App\Models\Inscripcione', 'grupo_id', 'id');
   }
 }

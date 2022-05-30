@@ -22,7 +22,7 @@ Create Inscripcione
             <div class="card card-default">
                 <div class="card-header">
                     <div class="float-right">
-                        <a class="btn btn-primary" href="{{ route('cursos.index') }}"> Atras</a>
+                        <a class="btn btn-primary" href="{{ route('inscripciones.index') }}"> Atras</a>
                     </div>
                 </div>
 

@@ -20,9 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Inscripcione extends Model
 {
-    
-    static $rules = [
-    ];
+
+    static $rules = [];
 
     protected $perPage = 20;
 
@@ -31,7 +30,7 @@ class Inscripcione extends Model
      *
      * @var array
      */
-    protected $fillable = ['alumno_id','grupo_id'];
+    protected $fillable = ['alumno_id', 'grupo_id', 'fecha_dictado'];
 
 
     /**
@@ -41,14 +40,12 @@ class Inscripcione extends Model
     {
         return $this->hasOne('App\Models\Alumno', 'id', 'alumno_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function grupo()
+    public function certificado()
     {
-        return $this->hasOne('App\Models\Grupo', 'id', 'grupo_id');
+        return $this->hasOne('App\Models\Certificacion', 'id', 'grupo_id');
     }
-    
-
 }

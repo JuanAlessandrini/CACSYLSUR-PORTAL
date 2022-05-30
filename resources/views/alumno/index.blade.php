@@ -39,37 +39,45 @@ Alumno
                         <table class="table table-striped table-hover">
                             <thead class="thead">
                                 <tr>
-                                    <th>No</th>
-
                                     <th>Nombre</th>
                                     <th>Apellido</th>
                                     <th>Dni</th>
+                                    <th>Ultimo Curso</th>
+                                    <th>Realizado</th>
+                                    @if (\Illuminate\Support\Facades\Auth::user()->name==='superadmin')
                                     <th>Empresa</th>
-
+                                    @endif
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($alumnos as $alumno)
                                 <tr>
-                                    <td>{{ ++$i }}</td>
-
                                     <td>{{ $alumno->nombre }}</td>
                                     <td>{{ $alumno->apellido }}</td>
                                     <td>{{ $alumno->dni }}</td>
+                                    <td></td>
+                                    <td></td>
+
                                     @isset($alumno->empresa->nombre_empresa)
-                                    <td>{{ $alumno->empresa->nombre_empresa }}</td>
+                                    @if(\Illuminate\Support\Facades\Auth::user()->name !== $alumno->empresa->nombre_empresa)
+                                    <td>{{ $alumno->empresa->nombre_empresa }} </td>
+                                    @endif
                                     @else
                                     <td>Sin empresa</td>
                                     @endisset
 
                                     <td>
                                         <form action="{{ route('alumnos.destroy',$alumno->id) }}" method="POST">
-                                            <a class="btn btn-sm btn-primary " href="{{ route('alumnos.show',$alumno->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>
-                                            <a class="btn btn-sm btn-success" href="{{ route('alumnos.edit',$alumno->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                            <a class="btn btn-sm btn-primary " href="{{ route('alumnos.show',$alumno->id) }}"><i class="fa fa-fw fa-eye"></i></a>
+                                            @can('editar-alumno')
+                                            <a class="btn btn-sm btn-success" href="{{ route('alumnos.edit',$alumno->id) }}"><i class="fa fa-fw fa-edit"></i></a>
+                                            @endcan
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Borrar</button>
+                                            @can('borrar-alumno')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>
