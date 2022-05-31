@@ -33,7 +33,7 @@ class Certificacion extends Model
    *
    * @var array
    */
-  protected $fillable = ['nombre_curso', 'slug_curso', 'validez'];
+  protected $fillable = ['nombre_curso', 'validez'];
 
 
   /**

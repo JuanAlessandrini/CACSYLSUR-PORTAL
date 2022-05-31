@@ -25,7 +25,7 @@
                     @isset($alumno->nombre)
                     <div class="row">
                         <div class="col">
-                            <h3> {{ $alumno->nombre }} {{ $alumno->apellido }}</h3>
+                            <h3> {{ $alumno->apellido }} {{ $alumno->nombre }}</h3>
                         </div>
                     </div>
                     <div class="row">
@@ -49,9 +49,10 @@
                                         <tr>
 
                                             <th>Curso</th>
-                                            <th>Realizado</th>
+                                            <th>Dictado</th>
                                             <th>Dias para vencimiento</th>
-                                            <th>Nota</th>
+                                            <th>Nota Teorica</th>
+                                            <th>Nota Practica</th>
 
 
                                             <th></th>
@@ -64,7 +65,15 @@
 
                                             <td>{{$curso->certificado->nombre_curso}}</td>
                                             <td>{{$curso->fecha_dictado}}</td>
-                                            <td></td>
+                                            <td>
+                                                @php
+                                                $validez = $curso->certificado->validez;
+                                                $hoy = new DateTime (date('Y-m-d'));
+                                                $fec_venci = new DateTime (date("Y-m-d",strtotime($curso->fecha_dictado . $validez."days" )));
+                                                $dias_venci =$hoy->diff($fec_venci);
+                                                @endphp
+                                                {{$dias_venci->days}} dias
+                                            <td>No informada</td>
                                             <td>No informada</td>
                                             <td>
                                                 <a href="{{ route('alumnos.download', $alumno->id) }}" class="btn btn-primaru btn-sm"><i class="fa fa-fw fa-download"></i> Descargar</a>

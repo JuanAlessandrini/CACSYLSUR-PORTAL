@@ -107,7 +107,7 @@ class CertificacionController extends Controller
         // $certificacion->slug_curso = null;
         // $certificacion->validez = $request->input('validez');
         //$certificacion->update($request->all());
-        dd($request->all());
+        dd($request->all(), $certificacion);
 
         return redirect()->route('certificaciones.index')
             ->with('success', 'Curso modificado correctamente');
