@@ -51,7 +51,9 @@ Alumno
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @foreach ($alumnos as $alumno)
+
                                 <tr>
                                     <td>{{ $alumno->nombre }}</td>
                                     <td>{{ $alumno->apellido }}</td>

@@ -40,7 +40,6 @@ Inscripcione
 
                                     <th>Alumno </th>
                                     <th>Dni </th>
-                                    <th>Empresa</th>
                                     <th>Curso </th>
 
                                     <th></th>
@@ -52,7 +51,7 @@ Inscripcione
                                 <tr>
                                     <td>{{ $inscripcione->alumno->nombre }} {{$inscripcione->alumno->apellido}}</td>
                                     <td>{{$inscripcione->alumno->dni}}</td>
-                                    <td></td>
+
                                     <td>{{$inscripcione->certificado->nombre_curso }}</td>
 
                                     <td>
